@@ -1,0 +1,163 @@
+* {
+	font-family: "Helvetica Neue Bold", Roboto, Helvetica, Arial, sans-serif;
+	font-weight: 700;
+}
+
+h1 {
+	font-family: "Helvetica Neue Light", Roboto, Helvetica, Arial, sans-serif;
+	font-size: 50px;
+	color: #ffffff;
+	line-height: 60px;
+	font-weight: 300;
+}
+
+h2 {
+	font-size: 24px;
+	color: #42C3C9;
+	line-height: 29px;
+}
+
+h3 {
+	font-size: 18px;
+	color: #4A4A4A;
+	line-height: 23px;
+}
+ p {
+ 	font-family: "Helvetica Neue", Roboto, Helvetica, Arial, sans-serif;
+ 	font-size: 16px;
+ 	color: #7B7573;
+ 	line-height: 24px;
+ 	font-weight: 400;
+ }
+
+.padding-none {
+	padding: 0;
+}
+
+.padding-top {
+	padding-top: 30px;
+}
+
+.padding-bottom {
+	padding-bottom: 30px;
+}
+
+.margin-right {
+	margin-right: 30px;
+}
+
+.btn {
+	padding: 20px;
+	margin: 0;
+	border-color: #9FB80A;
+	border-width: 2px;
+	color: #9FB80A;;
+}
+
+.btn:hover {
+	border-color: #9FB80A;
+}
+
+.btn.delete {
+	border-color: #aaaaaa;
+	color: #aaaaaa;
+}
+
+.btn.delete:hover {
+	border-color: #aaaaaa;
+	color: red;
+}
+
+.divider {
+	height: 15px;
+}
+
+
+.divider.big {
+	height: 130px;
+}
+
+.divider.blue {
+	background-color: #42C3C9;
+}
+
+.banner.main {
+	height: 300px;
+	background: url("/static/top-banner.jpg");
+	background-position: right;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.banner.menu {
+	height: 150px;
+	background-color: #E1E17F;
+}
+
+ .category-list {
+ 	background-color: #F0F0F0;
+ 	padding: 20px;
+u }
+
+ .category-list:hover {
+ 	background-color: #e1e17f;
+ 	padding: 20px;
+}
+
+.house-item {
+	background: #F0F0F0;
+	padding: 20px;
+	margin: 20px;
+	margin-left: -20px;
+}
+
+.item-price {
+	font-weight: 700;
+}
+
+.flash {
+	background-color: #ccffff;
+	width:100%;
+	text-decoration: none;
+
+}
+
+.flash li {
+	list-style-type: none;
+	text-align: center;
+
+}
+
+.top-menu {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.dark{
+	background-color: #3f4652;
+    background-image: url("/static/backdrop.jpg");
+    background-size: cover;
+    background-position: 0 0;
+}
+
+.auth{
+	min-height: 100%;
+    perspective: 400px;
+}
+
+.middlePage {
+	width: 550px;
+    height: 500px;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.panel > .panel-heading {
+    background-image: none;
+    background-color: #42C3C9;
+    color: white;
+
+}
