@@ -1,71 +1,124 @@
-# Log Analisys Project
-This is a project for [Udacity’s Full Stack Web Developer Nanodegree](https://br.udacity.com/course/full-stack-web-developer-nanodegree--nd004) that requires interacting with a live database both from the command line and from the python code.
+# Project 3: Item Catalog
+###
+Item Catalog project, part of the Udacity [Full Stack Web Developer
+Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004). 
 
-## Project Description:
+## What it is and does
+This is  RESTful web application utilizing the Flask framework which accesses a SQL database that populates categories and their items. OAuth2 provides authentication for further CRUD functionality on the application. Currently OAuth2 is implemented for Google Accounts.
 
-The assigned task is to create a reporting tool that prints out reports (in plain text) based on the data in the database. This reporting tool is a Python program using the psycopg2 module to connect to the database.
+It runs a website that stores details of house furnitures(items and catrgories). The user can login via Google or Facebook in order to add their own items.
 
-## Questions to Answer:
+## Required Libraries and Dependencies
+The project code requires the following software:
 
-1.	**What are the most popular three articles of all time?** Which articles have been accessed the most? Present this information as a sorted list with the most popular article at the top.
-2.	**Who are the most popular article authors of all time?** That is, when you sum up all of the articles each author has written, which authors get the most page views? Present this as a sorted list with the most popular author at the top.
-3.	**On which days did more than 1% of requests lead to errors?** The log table includes a column status that indicates the HTTP status code that the news site sent to the user's browser.
+* Python 2.7.x
+* [SQLAlchemy](http://www.sqlalchemy.org/) 0.8.4 or higher (a Python SQL toolkit)
+* [Flask](http://flask.pocoo.org/) 0.10.1 or higher (a web development microframework)
+* The following Python packages:
+    * oauth2client
+    * requests
+    * httplib2
+    * flask-seasurf (a CSRF defence)
 
-## This Project Requires a Bit of Setup: 
-This project runs in a Linux-based virtual machine (VM) created using Vagrant.
 
-### Environment dependencies:
-- Python 2.7
-- PostgreSQL
-- psycopg2
+You can run the project in a Vagrant managed virtual machine (VM) which includes all the
+required dependencies (see below for how to run the VM). For this you will need
+[Vagrant](https://www.vagrantup.com/downloads) and
+[VirtualBox](https://www.virtualbox.org/wiki/Downloads) software installed on your
+system.
 
-### PreRequisite Installations:
-- Install [Vagrant](https://www.vagrantup.com/downloads.html)
-- Install [Virtual Box plataform package and the Extension Pack](https://www.virtualbox.org/wiki/Downloads)
-- Clone the [vagrant setup files](https://github.com/udacity/fullstack-nanodegree-vm) from Udacity's Github to a directory of your choice. These files configure the virtual machine and install all the tools needed to run this project.
-- Download the database set up [newsdata.sql](1.https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip
-) (extract from **newsdata.zip**) 
-- Download this project: log_analysis.py
-- Move the file to your **vagrant** directory within Virtual Machine.
+## Project contents
+This project consists for the following files in the `catalog` directory:
 
-### Required SQl views
-This program uses four SQL views
+* `Catalog.py` - The main Python script that serves the website. If no database
+    is found, one is created and populated by `populate_database.py`.
+* `fb_client_secrets.json` - Client secrets for Facebook OAuth login.
+* `client_secrets.json` - Client secrets for Google OAuth login.
+* `README.md` - This read me file.
+    * `/static` - Directory containing CSS and Javascript for the website.
+       
+    * `/templates` - Directory containing the HTML templates for the website.
+  
 
-**1) total_requests**
+## How to Run the Project
+Download the project zip file to you computer and unzip the file. Or clone this
+repository to your desktop.
+
+Open the text-based interface for your operating system (e.g. the terminal
+window in Linux, the command prompt in Windows).
+
+Navigate to the project directory and then enter the `vagrant` directory.
+
+### Bringing the VM up
+Bring up the VM with the following command:
+
+```bash
+vagrant up
 ```
-create view total_requests
-as select date_trunc('day',time) as day, count(*) as totals
-from log
-group by day
-```
-**2) error_requests**
-```
-crete view error_requests as select date_trunc('day',time) as day, count(*) as errors
-from log
-where status LIKE '404%'
-group by day
-```
-**3) percent**
-```
-create view percent as select total_requests.day,
-total_requests.totals as numall,
-error_requests.errors as numerror,
-error_requests.errors::double precision/total_requests.totals ::double precision * 100 AS percentage_error
-from total_requests, error_requests
-where total_requests.day= error_requests.day;
+
+The first time you run this command it will take awhile, as the VM image needs to
+be downloaded.
+
+You can then log into the VM with the following command:
+
+```bash
+vagrant ssh
 ```
 
-### Start the Virtual Machine:
-Open terminal, navigate to the folder where your vagrant is installed in and run these commands:
-1. Run `vagrant up` to build the VM for the first time
-2. Once It os built, `vagrant ssh` to log into the VM
-3. `cd /vagrant` to change to your vagrant directory
-4. `psql -d news -f newsdata.sql` to load the data
-5. `psql -d news` to connect to database
-6. **Enter the views listed above**
-7. `exit` to quit psql module
-8. `python log_analysis.py` to run the reporting tool
+More detailed instructions for installing the Vagrant VM can be found
+[here](https://www.udacity.com/wiki/ud197/install-vagrant).
 
-### Credentials
-A base code was provided in this lesson as exemple in order to guide the project execution:
--[Restaurant Project Udacity](https://github.com/udacity/ud330)
+### Make sure you're in the right place
+Once inside the VM, navigate to the tournament directory with this command:
+
+```bash
+cd /vagrant/catalog
+```
+
+### OAuth setup
+In order to log in to the web app, you will need to get either a Google+ or Facebook
+(or both) OAuth app ID and secret. For Google, go to the
+[Google Developers Console](https://console.developers.google.com/) and for Facebook,
+go to [Facebook Login](https://developers.facebook.com/products/login).
+
+Once you have your credentials, put the IDs and secrets in the `fb_client_secrets.json`
+file for Facebook and `client_secrets.json` for Google.
+
+You will now be able to log in to the app.
+
+### Run application.py
+On the first run of `application.py` there will be no database present, so it creates
+one and populates it with sample data. On the command line do:
+
+```bash
+python application.py
+```
+
+It then starts a web server that serves the application. To view the application,
+go to the following address using a browser on the host system:
+
+```
+http://localhost:8000/
+```
+
+You should see the 10 latest animals that were added to the database. Go ahead and
+explore the web site. To add an animal, you'll need to log in first with either a
+Google or Facebook account.
+
+
+### Shutting the VM down
+When you are finished with the VM, press `Ctrl-D` to logout of it and shut it down
+with this command:
+
+```bash
+vagrant halt
+```
+
+## Extra Credit Description
+The following features are present to earn an extra credit from Udacity.
+
+### XML Endpoint
+Database contents can be obtained in XML form by going to
+[http://localhost:8000/catalog.xml](http://localhost:5000/catalog.xml). Depending
+on your browser, you may need to view source of the page to view the XML file. You
+can do this by right-clicking and selecting `View Page Source` from the menu.
